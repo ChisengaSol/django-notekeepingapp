@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("NOTEKEEPING_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DEBUG")
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -83,16 +83,17 @@ WSGI_APPLICATION = 'keep_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("NOTEKEEPING_DATABASE_NAME"),
-        "USER": env("NOTEKEEPING_DATABASE_USER"),
-        "PASSWORD": env("NOTEKEEPING_DATABASE_PASSWORD"),
-        "HOST": env("NOTEKEEPING_DATABASE_HOST"),
-        "PORT": env("NOTEKEEPING_DATABASE_PORT"),
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": env("NOTEKEEPING_DATABASE_NAME"),
+#         "USER": env("NOTEKEEPING_DATABASE_USER"),
+#         "PASSWORD": env("NOTEKEEPING_DATABASE_PASSWORD"),
+#         "HOST": env("NOTEKEEPING_DATABASE_HOST"),
+#         "PORT": env("NOTEKEEPING_DATABASE_PORT"),
+#     }
+# }
+DATABASES['default'] =  dj_database_url.config()
 
 
 # Password validation
