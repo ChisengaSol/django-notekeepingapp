@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'keep_project.wsgi.application'
 #         "PORT": env("NOTEKEEPING_DATABASE_PORT"),
 #     }
 # }
-DATABASES =  dj_database_url.config()
+DATABASES['default'] =  dj_database_url.config()
 
 
 # Password validation
