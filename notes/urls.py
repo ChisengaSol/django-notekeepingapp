@@ -12,6 +12,7 @@ urlpatterns=[
     path('update/<int:id>/',views.update,name='update'),
     path('register/',views.register,name='register'),
     path('settings/',views.settings,name='settings'),
-    path('delete/<int:id>/',views.delete,name='delete')
+    path('delete/<int:id>/',views.delete,name='delete'),
+    path('add-programming-language/',views.add_proglanguage,name='add-programming-language'),
 
 ]

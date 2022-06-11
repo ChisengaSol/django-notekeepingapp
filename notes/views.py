@@ -4,10 +4,20 @@ from django.contrib import messages
 # Create your views here.
 
 from .models import Note
-from .forms import NoteCreationForm,NoteUpdateForm,AccountSettingsForm
+from .forms import NoteCreationForm,NoteUpdateForm,AccountSettingsForm,CreateProgrammingLangForm
 
 def index(request):
     return  render(request,'notes/index.html')
+
+def add_proglanguage(request):
+    form = CreateProgrammingLangForm
+    if request.method == "POST":
+        form = CreateProgrammingLangForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Language Created successfully")
+            return redirect('notes:add-programming-language')
+    return render(request, "notes/add_programminglanguage.html",{'form':form})
 
 
 def register(request):
