@@ -1,7 +1,6 @@
 from django import forms
 from .models import Note,Languangedetails
 from django.contrib.auth.models import User
-from dal import autocomplete 
 from searchableselect.widgets import SearchableSelect
 
 class NoteCreationForm(forms.ModelForm):
