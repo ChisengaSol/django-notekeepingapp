@@ -12,3 +12,8 @@ const closeModal=(id)=>{
 
     el.style.display="none";
 }
+
+//script to protect after ddos attacks(prevent F5 after submit)
+if(window.history.replaceState){
+    window.history.replaceState(null,null,window.location.href);
+}

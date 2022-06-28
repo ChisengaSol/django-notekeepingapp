@@ -1,4 +1,5 @@
 from django.urls import path
+from django.conf.urls import url,include
 from . import views
 import django.contrib.auth.views as auth_views
 
@@ -14,5 +15,4 @@ urlpatterns=[
     path('settings/',views.settings,name='settings'),
     path('delete/<int:id>/',views.delete,name='delete'),
     path('add-programming-language/',views.add_proglanguage,name='add-programming-language'),
-
 ]

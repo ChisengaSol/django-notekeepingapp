@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+import json
+from django.http import JsonResponse
 # Create your views here.
 
-from .models import Note
+from .models import Note, Languangedetails
 from .forms import NoteCreationForm,NoteUpdateForm,AccountSettingsForm,CreateProgrammingLangForm
 
 def index(request):
@@ -41,6 +43,11 @@ def register(request):
 def home_page(request):
     notes=Note.objects.all()
     form=NoteCreationForm()
+
+    if request.is_ajax():
+        term = request.GET.get('term')
+        languages = Languangedetails.objects.all().filter(languange_name__icontains=term)
+        return JsonResponse(list(languages.values()), safe=False)
 
     if request.method == "POST":
         form=NoteCreationForm(request.POST)

@@ -1,21 +1,38 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block body %}    
     <div class="container">
         <div class="form">
             <h3 class="text-primary">Add Programming Language</h3>
-            {% if messages %}
                 
             {% for message in messages %}
-                <p class="alert alert-{{message.tags}}">{{message}}</p>
-            {% endfor %}
+                {% if message.tags == 'success' %}
+                <!-- <p class="alert alert-{{message.tags}}">{{message}}</p> -->
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+                <script src="{% static 'js/jquery.toast.js' %}"></script>
+                <script>
+                    var success_toast = $.toast({
+                        heading: 'Success',
+                        text: '<br/>Programming language/technology successfully added.',
+                        showHideTransition: 'slide',
+                        icon: 'success',
+                        position:'top-right',
+                        icon:'success',
+                        // hideAfter: false,
+                        hideAfter: 10000   // in milli seconds
+                    })
+                </script>
+                {% endif %}
                 
-        {% endif %}
+            {% endfor %}
+
             <form action="" method="POST">
                 {% csrf_token %}
                 {{form |crispy}}
                 <button type="submit" class="btn-info btn">Save</button>
             </form>
-    </div>
-    </div>    
+        </div>
+    </div> 
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>    -->
 {% endblock body %}
