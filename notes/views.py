@@ -3,7 +3,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 import json
 from django.http import JsonResponse
-# Create your views here.
+
+# Pagination
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Note, Languangedetails
 from .forms import NoteCreationForm,NoteUpdateForm,AccountSettingsForm,CreateProgrammingLangForm
@@ -59,8 +61,21 @@ def home_page(request):
 
             return redirect('notes:home_page')
 
+    #add pagination for the list of notes
+    paginator = Paginator(notes,1)
+    page = request.GET.get("page")
+    try:
+        notes_obj = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        notes_obj = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        notes_obj = paginator.page(paginator.num_pages)
+
+
     context={
-        'notes':notes,
+        'notes_obj':notes_obj,
         'form':form
     }
     return render(request,'notes/home.html',context)

@@ -7,7 +7,7 @@
         <h1>Recent Notes</h1>
         <div class="notes">
             
-            {% for note in notes %}
+            {% for note in notes_obj %}
             <div class="note">
                 <h2 class="text-info">{{note.title}}</h2>
                 <p>{{note.description}}</p>
@@ -20,6 +20,19 @@
             </div>
             {% endfor %}
                 
+        </div>
+        <div class="pagination">
+            <span class="step-links">
+                {% if notes_obj.has_previous %}
+                <a type="button" class="btn btn-primary" href="?page={{ notes_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+                <span class="current">
+                    Page {{ notes_obj.number }} of {{ notes_obj.paginator.num_pages }}.
+                </span>
+                {% if notes_obj.has_next %}
+                <a type="button" class="btn btn-primary" href="?page={{ notes_obj.next_page_number }}">Next</a>
+                {% endif %}
+            </span>
         </div>
     </div>
     <div class="add-modal" id="add-modal">
