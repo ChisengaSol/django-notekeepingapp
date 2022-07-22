@@ -62,7 +62,7 @@ def home_page(request):
             return redirect('notes:home_page')
 
     #add pagination for the list of notes
-    paginator = Paginator(notes,1)
+    paginator = Paginator(notes,5)
     page = request.GET.get("page")
     try:
         notes_obj = paginator.page(page)
